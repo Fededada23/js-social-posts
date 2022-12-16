@@ -55,3 +55,32 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+const bottoneLike = document.getElementsByClassName('js-like-button');
+const arrayLike = [];
+
+for (let i=0; i<bottoneLike.length; i++){
+
+    bottoneLike[i].addEventListener('click', function(){
+
+        const postId = this.dataset.postid;
+        const likes = document.getElementById(`like-counter-${postId}`);
+        const likesNumber = parseInt(likes.innerText);
+
+        if(arrayLike.includes(postId)){
+            likes.innerText = likesNumber-1;
+
+            const index = arrayLike.indexOf(postId);
+            if(index > -1){
+                arrayLike.splice(index,1);
+            }
+            bottoneLike[i].classList.remove("like-button--liked");
+            console.log(arrayLike);
+        }else{
+            likes.innerText = likesNumber+1;
+            arrayLike.push(postId);
+            console.log(arrayLike);
+            bottoneLike[i].classList.add("like-button--liked");
+        }
+
+    });
+}
